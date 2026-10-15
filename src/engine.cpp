@@ -248,8 +248,7 @@ void Engine::resize_threads() {
     const bool  ttLayoutDependsOnThreads =
       threadsSpannedNumaNodes || numaContext.get_numa_config().requires_memory_replication();
 
-    // Reallocate the hash with the new threadpool size
-    if (ttSizeMb != hashMb || ttLayoutDependsOnThreads)
+    if (tt.size_mb() != hashMb || ttLayoutDependsOnThreads)
         set_tt_size(hashMb);
     threads.ensure_network_replicated();
 }
@@ -257,7 +256,6 @@ void Engine::resize_threads() {
 void Engine::set_tt_size(usize mb) {
     wait_for_search_finished();
     tt.resize(mb, threads);
-    ttSizeMb = mb;
 }
 
 void Engine::set_ponderhit(bool b) { threads.main_manager()->ponder = b; }

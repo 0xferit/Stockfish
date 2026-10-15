@@ -128,7 +128,6 @@ class Engine {
     OptionsMap                                        options;
     ThreadPool                                        threads;
     TranspositionTable                                tt;
-    std::optional<usize>                              ttSizeMb;
     Eval::NNUE::EvalFile                              networkFile;
     LazyNumaReplicatedSystemWide<Eval::NNUE::Network> network;
 
